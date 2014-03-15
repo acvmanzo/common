@@ -1,0 +1,1939 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Ubuntu configuration notes
+\end_layout
+
+\begin_layout Section
+After installation
+\end_layout
+
+\begin_layout Standard
+Immediately after installation, update package index (in Synatic or with
+ "sudo apt-get update") 
+\end_layout
+
+\begin_layout Section
+Xmonad
+\end_layout
+
+\begin_layout Standard
+Source: http://www.haskell.org/haskellwiki/Xmonad/Using_xmonad_in_Gnome#Setting_up
+_Gnome_to_use_Xmonad
+\end_layout
+
+\begin_layout Enumerate
+\align left
+To install xmonad and then to get it to start, open command line and type:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+\align left
+# gconftool-2 -s /desktop/gnome/session/required_components/windowmanager
+ xmonad --type string
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+To load xmonad automatically on startup, create the file /usr/share/applications
+/xmonad.desktop and paste: 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+Type=Application
+\end_layout
+
+\begin_layout LyX-Code
+Encoding=UTF-8
+\end_layout
+
+\begin_layout LyX-Code
+Name=Xmonad
+\end_layout
+
+\begin_layout LyX-Code
+Exec=xmonad
+\end_layout
+
+\begin_layout LyX-Code
+NoDisplay=true
+\end_layout
+
+\begin_layout LyX-Code
+X-GNOME-WMName=Xmonad
+\end_layout
+
+\begin_layout LyX-Code
+X-GNOME-Autostart-Phase=WindowManager
+\end_layout
+
+\begin_layout LyX-Code
+X-GNOME-Provides=windowmanager
+\end_layout
+
+\begin_layout LyX-Code
+X-GNOME-Autostart-Notify=false
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Log out and log back in, and it should work.
+\end_layout
+
+\begin_layout Enumerate
+To configure, copy/create the xmonad.hs file in an .xmonad directory in the
+ home folder.
+\end_layout
+
+\begin_layout Section
+configure-trackpoint
+\end_layout
+
+\begin_layout Standard
+Download the debian package from http://tpctl.sourceforge.net/configure-trackpoint.
+html.
+\end_layout
+
+\begin_layout Section
+gpointing-device-settings
+\end_layout
+
+\begin_layout Standard
+In the repository.
+\end_layout
+
+\begin_layout Section
+VirtualBox
+\end_layout
+
+\begin_layout Standard
+Creating a new virtual machine from a previously configured .vdi file:
+\end_layout
+
+\begin_layout Enumerate
+Create a new virtual machine.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Copy the virtual hard drive file you want to use (.vdi) into the virtual
+ machine directory ( ~/.VirtualBox/HardDisks).
+\end_layout
+
+\begin_layout Enumerate
+Go into the settings for that virtual machine and add the virtual hard drive
+ to it.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The virtual machine should boot off it automatically.
+\end_layout
+
+\begin_layout Standard
+Attaching a new hard drive:
+\end_layout
+
+\begin_layout Enumerate
+Create a new hard drive.
+\end_layout
+
+\begin_layout Enumerate
+In the virtual machine, set the gparted live iso (in ~/software) as the
+ primary master and the new hard drive as the secondary master.
+\end_layout
+
+\begin_layout Enumerate
+Use the GUI in gparted to format the new hard drive as nfts.
+\end_layout
+
+\begin_layout Enumerate
+Exit and make the original xp hard drive as the primary master, the guest
+ additions iso as the primary slave, and the new large hard drive as the
+ secondary master.
+\end_layout
+
+\begin_layout Enumerate
+Start up the machine and now you should have access to the new hard drive.
+\end_layout
+
+\begin_layout Section
+Dualboot windows xp and ubuntu 10.04 (installing ubuntu first)
+\end_layout
+
+\begin_layout Enumerate
+Resize the ubuntu partition so that there is unallocated space, either by
+ using the Ubuntu boot disk utility or by running Ubuntu off the boot disk
+ and using GParted (Under System>Administration I believe).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Boot the computer with the XP install disk.
+ Make the partition and format it using this disk.
+ NOTE: On computers with SATA hard drives, XP will not be able to recognize
+ the hard drive because it does not have the right drivers.
+ To get around this you can enter the BIOS and switch the hard drive configurati
+on from "AHCI" to "Compatibility mode".
+ Then it will be able to recognize the drive.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Install Windows XP.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Apparently, Windows XP overwrites the MBR (master boot loader) file so that
+ it only boots Windows.
+ To rewrite the MBR file, you can do the following: (from https://help.ubuntu.com/
+community/Grub2#Reinstalling%20from%20LiveCD).
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Boot ubuntu from boot disk.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Figure out what partition ubuntu is on (# sudo fdisk -l) (The partition
+ should be mounted already) 
+\end_layout
+
+\begin_layout Enumerate
+Mount the drive into the /mnt folder by typing "# sudo mount /dev/sdXY /mnt"
+ where XY refers to the ubuntu partition.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Then type "# sudo grub-install --root-directory=/mnt/ /dev/sdX" where "X"
+ is a or b or whatever is the appropriate letter.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Reboot off the hard drive.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Refresh the GRUB2 menu with 
+\begin_inset Quotes eld
+\end_inset
+
+$ sudo update-grub
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Now upon booting up, you are given the option as to which operating system
+ to use.
+ 
+\end_layout
+
+\begin_layout Section
+Point Grey 
+\end_layout
+
+\begin_layout Standard
+website with instructions:
+\begin_inset Newline newline
+\end_inset
+
+http://www.cyberciti.biz/faq/rebuilding-ubuntu-debian-linux-binary-package/
+\end_layout
+
+\begin_layout Enumerate
+Install dpkg first ($ sudo apt-get install dpkg).
+\end_layout
+
+\begin_layout Enumerate
+To get source typed: "$ sudo apt-get source libdc1394-22" (downloads source
+ file into current folder).
+ 
+\end_layout
+
+\begin_layout Enumerate
+To install build dependencies typed: "$ sudo apt-get build-dep libdc1394-22"
+ 
+\end_layout
+
+\begin_layout Enumerate
+To unpack source archives typed: "$ dpkg-source -x foo_version-revision.dsc".
+ 
+\end_layout
+
+\begin_layout Enumerate
+CD'd into the directory with source code, same folder called "libdc1394-22-2.1.2".
+ 
+\end_layout
+
+\begin_layout Enumerate
+Modified the libdc1394-22-2.1.2/1394/usb/control.c file as outlined on the
+ Point Grey website (google point grey linux).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Recompiled package by CDing into the source directory and typing "$ dpkg-buildpa
+ckage -rfakeroot -b".
+ 
+\end_layout
+
+\begin_layout Enumerate
+Makes several install packages.
+ Double-clicked on 'libdc1394-22_2.1.2-2_i386.deb' to reinstall package.
+ (This new package can be found in ~/revised_packages).
+\end_layout
+
+\begin_layout Enumerate
+Fview now works, but only as root.
+ Libusb does not have permission to access the usb hub.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+To fix this, cd into the directory /etc/udev/rules.d.
+ Udev is the hardware manager, and adding a rule to this directory will
+ grant permissions.
+ The README has some info.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Typed '$ lsusb' to list usb devices and ownership.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Created a file (using sudo gedit) called 95-firefly-mv.rules (the higher
+ number means it takes precedence).
+ (A copy of this file is located in ~/Documents/ubuntu/config_files)
+\end_layout
+
+\begin_layout Enumerate
+The file contains the line:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+SUBSYSTEM=="usb",ENV{DEVTYPE}=="usb_device",SYSFS{idVendor}=="1e10",SYSFS{idProd
+uct}=="2002",MODE="0666"
+\end_layout
+
+\begin_layout Standard
+These numbers can be obtained by typing
+\end_layout
+
+\begin_layout LyX-Code
+lsusb
+\end_layout
+
+\begin_layout Standard
+into the command line; the camera should be listed as one of the devices.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Unplug and replug the camera and it should work.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Note, if fview was run before as root, an error message "[Errno 13] Permission
+ denied: '/home/andrea/.fview/fviewrc'" will appear.
+ Delete this file and restart fview.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Resources:
+\end_layout
+
+\begin_layout Itemize
+http://www.reactivated.net/writing_udev_rules.html
+\end_layout
+
+\begin_layout Itemize
+http://ubuntuforums.org/showthread.php?t=901891
+\end_layout
+
+\begin_layout Itemize
+http://en.wikipedia.org/wiki/File_system_permissions#Octal_notation
+\end_layout
+
+\begin_layout Standard
+Relevant info from ubuntuforums.org thread:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes eld
+\end_inset
+
+It's also quite possible that the USB device is getting mounted as owned
+ by root, particularly if this is a somewhat unique device.
+ Working with hacked CVS one time use cameras I had a similar problem.
+ The solution was to create another permissions file which mounted the device
+ for world access (I'm the only one on my PC - you could make it mount to
+ a certain group and put yourself in that group).
+\end_layout
+
+\begin_layout Quote
+In order to try to set that up for you to test, please be sure the device
+ is plugged in and then do the following in a terminal window and post the
+ output back here.
+\end_layout
+
+\begin_layout Quote
+(1) lsusb
+\end_layout
+
+\begin_layout Quote
+Hopefully you will see your device listed, though it may just be a blank
+ name.
+\end_layout
+
+\begin_layout Quote
+(2) For that device:
+\end_layout
+
+\begin_layout LyX-Code
+dave@dave-desktop:~$ lsusb
+\end_layout
+
+\begin_layout LyX-Code
+Bus 004 Device 007: ID 0dca:002b <=== You want these 2 numbers 
+\end_layout
+
+\begin_layout LyX-Code
+Bus 004 Device 004: ID 03f0:7604 Hewlett-Packard Deskjet 3940
+\end_layout
+
+\begin_layout LyX-Code
+Bus 004 Device 003: ID 050d:705c Belkin Components 
+\end_layout
+
+\begin_layout LyX-Code
+Bus 004 Device 002: ID 05e3:0608 Genesys Logic, Inc.
+ USB-2.0 4-Port HUB
+\end_layout
+
+\begin_layout LyX-Code
+Bus 004 Device 001: ID 0000:0000 
+\end_layout
+
+\begin_layout LyX-Code
+Bus 003 Device 001: ID 0000:0000 
+\end_layout
+
+\begin_layout LyX-Code
+Bus 002 Device 001: ID 0000:0000 
+\end_layout
+
+\begin_layout LyX-Code
+Bus 001 Device 002: ID 045e:0053 Microsoft Corp.
+ 
+\end_layout
+
+\begin_layout LyX-Code
+Bus 001 Device 001: ID 0000:0000
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+dave@dave-desktop:~$ lsusb -v -d 0dca:002b
+\end_layout
+
+\begin_layout Quote
+Basically, when a device is sort of a non-standard device (this is a little
+ hard for me to explain), in particular not a usb file system, the mount
+ rules in /etc/udev/rules.d/40-basic-permissions.rules apply.
+ Now, be aware that the syntax changed going from 7.10 to 8.04, and right
+ now I can't recall the pre-8.04 syntax.
+ To fix my problem, I created a file called 41-cvs-permissions.rules - just
+ be sure the number is above 40 and doesn't conflict with an existing file.
+ Note that I created this file while running as root, so be sure to match
+ it's permissions to those of the 40-basic-permissions.rules file.
+\end_layout
+
+\begin_layout Quote
+My file contains the following - hopefully you'll now see the correlation
+ of the numbers:
+\end_layout
+
+\begin_layout LyX-Code
+# USB devices (usbfs replacement) SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device",S
+YSFS{idVendor}=="0dca" , SYSFS{idProduct}=="0027", MODE="0666" SUBSYSTEM=="usb",
+ ENV{DEVTYPE}=="usb_device",SYSFS{idVendor}=="167b" , SYSFS{idProduct}=="0101",
+ MODE="0666"
+\end_layout
+
+\begin_layout Quote
+Please note that the second usb_device is for another set of CVS cameras
+ have.
+ The idea is to make it either world accessable as I did with MODE="0666",
+ or to set a group id or other such thing.
+\end_layout
+
+\begin_layout Quote
+If you follow my previous post of the lsusb and this file, you will see
+ I'm dealing with the usb device of major id (vendor) of "0dca" and minor
+ id (product) of "0027".
+ It just was by coincidence that it was the first in my lsusb list.
+ These particular devices for me never come up with a name.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Fview
+\end_layout
+
+\begin_layout Subsection
+Ubuntu 10.04
+\end_layout
+
+\begin_layout Enumerate
+Followed instructions on motmot website for adding keyring, repository,
+ and then downloading fview from Synaptics.
+ http://code.astraw.com/projects/motmot/download.html
+\end_layout
+
+\begin_layout Enumerate
+Added astraw's repostiories to /etc/apt/sources.list manually; added lines
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+deb http://debs.astraw.com/ lucid/ 
+\end_layout
+
+\begin_layout LyX-Code
+deb-src http://debs.astraw.com/ lucid/
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Other distributions
+\end_layout
+
+\begin_layout Itemize
+Cloned source files from git (instructions on motmot website; http://code.astraw.c
+om/projects/motmot/development.html#development) which downloads to the computer
+\end_layout
+
+\begin_layout Itemize
+Main folders for each module; cd'd into the modules I needed and typed
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+sudo python setup.py install
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+For just viewing and manipulating fmf files, installed imops and FlyMovieFormat
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Chrome
+\end_layout
+
+\begin_layout Enumerate
+Install from Synaptic
+\end_layout
+
+\begin_layout Enumerate
+Note: Sometimes chrome starts up and shows an error message saying it can't
+ read your profile.
+ To fix this, backup the ~/.config/google-chrome/Default folder, delete it,
+ then make a new folder with the copy.
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+mv -r ~/.config/google-chrome/Default ~/.config/chromium/Backup
+\begin_inset Newline newline
+\end_inset
+
+rm -rf ~/.config/google-chrome/Default 
+\begin_inset Newline newline
+\end_inset
+
+cp -R ~/.config/google-chrome/Backup ~/.config/google-chrome/Default
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+See: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://ubuntuforums.org/showthread.php?t=1341721
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+ImageJ
+\end_layout
+
+\begin_layout Standard
+It is best to download ImageJ from the ImageJ website rather than downloading
+ it with the Debian package installer (this ImageJ has a bug in which it
+ looks in the wrong place for the java compiler when trying to compile plugins;
+ this bug is intractable).
+ To get imagej to run from the command line I did the following (source
+ http://rsb.info.nih.gov/ij/docs/install/linux.html):
+\end_layout
+
+\begin_layout Enumerate
+Extract the .gzip file into a folder for keeping software (I use ~/software).
+\end_layout
+
+\begin_layout Enumerate
+Modify the 
+\begin_inset Quotes eld
+\end_inset
+
+run
+\begin_inset Quotes erd
+\end_inset
+
+ file in the folder.
+ Follow the instructions on the ImageJ website for installing ImageJ in
+ Ubuntu.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Specify the path, the memory, and the ijpath; new run file reads:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+/home/andrea/software/ImageJ/jre/bin/java -Xmx1026m -jar /home/andrea/software/I
+mageJ/ij.jar -ijpath /home/andrea/software/ImageJ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+This gives ImageJ 1026 MB of memory, and specifies the java file, jar file,
+ and the ijpath where the plugins are in.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Then I made a folder called /home/andrea/bin, and in this folder I made
+ a symbolic link to the 'run' file by typing: 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+ln -s ~/software/ImageJ/run imagej
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Then I added the /home/andrea/bin folder to the $PATH, which are the folders
+ that bash looks in when you type an executable.
+ To do this, I modified the ~/.bashrc file by adding a line in the end that
+ says 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+export PATH=$PATH":/home/andrea/bin"
+\end_layout
+
+\begin_layout Standard
+To display the folders that are in PATH, type 
+\end_layout
+
+\begin_layout LyX-Code
+echo $PATH
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Then I made the run file executable by cd'ing into the ImageJ directory
+ and typing:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+chmod a+x run
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+After doing these steps imageJ should run from the command line.
+\end_layout
+
+\begin_layout Enumerate
+You can add a launcher to the Applications panel by following the instructions
+ online.
+ When copying the ImageJ.png graphic to /usr/share/pixmaps, I had to copy
+ it as root and then change the permissions as root.
+\end_layout
+
+\begin_layout Enumerate
+ImageJ macros/plugins:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+LSM Toolbox
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Important notes
+\end_layout
+
+\begin_layout Enumerate
+ImageJ does not work well with xmonad; the shortcut keys don't really work
+ at all.
+ I think what I will do is just use ImageJ with metacity.
+ To do this, I went into the /usr/share/applications folder and renamed
+ xmonad.desktop to noxmonad.desktop (use sudo).
+ Then I logged out and logged back in, and then opened a terminal and typed
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+metacity --replace&
+\end_layout
+
+\begin_layout Standard
+This restores metacity, but don't close the terminal so that it runs in
+ the background.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Large image stacks and .avi files work well if opened as Virtual Stacks (option
+ in open menu), takes up less RAM.
+\end_layout
+
+\begin_layout Section
+Mendeley Desktop
+\end_layout
+
+\begin_layout Standard
+Installed with these instructions: http://www.mendeley.com/download-mendeley-deskt
+op/ubuntu
+\end_layout
+
+\begin_layout Section
+Printing
+\end_layout
+
+\begin_layout Subsection
+Xerox Phaser 6130N (lab color printer)
+\end_layout
+
+\begin_layout Itemize
+Go to System>Administration>Printers and select Add>Printer.
+\end_layout
+
+\begin_layout Itemize
+A dialog box comes up.
+ If you select 
+\begin_inset Quotes eld
+\end_inset
+
+Find Network Printer
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+LPD/LPR Host or Printer
+\begin_inset Quotes erd
+\end_inset
+
+ and type the IP Address (128.32.88.32) into the 'Host:' box and then click
+ 'Forward', Ubuntu will automatically find a printer driver and install
+ it for you.
+ However, this driver sort of sucks and printing is really slow.
+ 
+\end_layout
+
+\begin_layout Itemize
+Download the Linux Cups Printing package from the Xerox website (just google
+ the printer name and follow the links from the product website).
+ Extract the contents of the tarball; I put it into the ~/software folder.
+\end_layout
+
+\begin_layout Itemize
+To change the printer driver, right click on the printer and select Properties.
+ Next to 
+\begin_inset Quotes eld
+\end_inset
+
+Make and Model:
+\begin_inset Quotes erd
+\end_inset
+
+ click Change.
+ When the dialog box comes up, select 
+\begin_inset Quotes eld
+\end_inset
+
+Provide PPD file
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Select the appropriate PPD file from the Linux Cups Printing package folder.
+ Hit 'Forward'.
+\end_layout
+
+\begin_layout Itemize
+Note: The default option is to use manual feed to provide the paper, so
+ change that both in the printer properties (Right click on printer > Properties
+) and while printing actual documents (select Printer Default instead of
+ Manual feed).
+\end_layout
+
+\begin_layout Itemize
+Note: Ubuntu comes with other ppd files for the Phaser 6130N which you can
+ see if you click 
+\begin_inset Quotes eld
+\end_inset
+
+Select PPD from database
+\begin_inset Quotes erd
+\end_inset
+
+ instead of 
+\begin_inset Quotes eld
+\end_inset
+
+Provide PPD file
+\begin_inset Quotes erd
+\end_inset
+
+.
+ One of these might work better.
+\end_layout
+
+\begin_layout Section
+mplayer/ smplayer
+\end_layout
+
+\begin_layout Standard
+To get the latest version of mplayer, I decided to install mplayer and smplayer
+ from source.
+ 
+\end_layout
+
+\begin_layout Standard
+Instructions for installing 
+\series bold
+mplayer
+\series default
+ are here: http://www.mplayerhq.hu/DOCS/README.
+ I basically followed all the steps.
+ Specifically, I got mplayer from svn (link here http://www.mplayerhq.hu/design7/d
+load.html#binaries), ran svn update, cd'd into the proper directory, and
+ typed './configure' to configure mplayer.
+ Then I typed 'make' to compile and 'sudo make install' to install mplayer.
+ Explicitly:
+\end_layout
+
+\begin_layout Itemize
+Added to the /etc/apt/sources.list: (maybe not totally required)
+\end_layout
+
+\begin_layout LyX-Code
+deb http://ppa.launchpad.net/motumedia/mplayer-daily/ubuntu lucid main  deb-src
+ http://ppa.launchpad.net/motumedia/mplayer-daily/ubuntu lucid main 
+\end_layout
+
+\begin_layout Itemize
+Went to http://www.mplayerhq.hu/design7/dload.html#binaries and downloaded
+ the latest Subversion snapshot.
+\end_layout
+
+\begin_layout Itemize
+Extracted .bz2 file to ~/software, cd'd into mplayer directory and typed
+\end_layout
+
+\begin_layout LyX-Code
+svn update
+\end_layout
+
+\begin_layout LyX-Code
+./configure
+\end_layout
+
+\begin_layout Itemize
+If ffmpeg or git-core are not installed, an error will pop up.
+ Type sudo apt-get git-core to install git (which houses the ffmpeg code
+ that mplayer will automatically acquire).
+\end_layout
+
+\begin_layout Itemize
+
+\end_layout
+
+\begin_layout Standard
+(Might work to do 'sudo make' also).
+ For some reason, I got an error code saying that 'config.mak' file was not
+ found, and so I had to run the ./configure command again.
+ In the end it worked.
+\end_layout
+
+\begin_layout Standard
+I also installed 
+\series bold
+smplayer
+\series default
+ by downloading the tarball from their website and following the installation
+ instructions in the Install.txt file in the tarball.
+ The weird thing about making or installing a debian package is that it
+ automatically installs the version of mplayer that's in the repositories,
+ which is old.
+ Soooo, I don't know what the best thing to do is.
+ And ubuntu seemed to think that the version I downloaded is not as current
+ as the version in the repositories.
+ Anyhow, following the manual compile instructions worked fine.
+ Smplayer is installed in /usr/local/bin, and so I made a symlink in the
+ ~/software directory by typing ln -s /usr/local/bin/smplayer smplayer.
+ So now it runs from the command line quite swimmingly.
+\end_layout
+
+\begin_layout Standard
+Update - mplayer mf://* does not work with the version I installed, so I
+ just deleted it and installed it from the repository.
+ Whatever, it is fine.
+ Had to make symbolic link in /usr/local/bin.
+\end_layout
+
+\begin_layout Section
+vlc player
+\end_layout
+
+\begin_layout Standard
+I tried to install from source, but had some problems with getting the build
+ dependencies.
+ In particular, I couldn't find the 'iceape' package, so just installed
+ the version in the repositories, which is pretty old.
+\end_layout
+
+\begin_layout Section
+Projector/external monitors
+\end_layout
+
+\begin_layout Standard
+Can go to System>Preferences>Monitors to adjust resolution, etc.
+\end_layout
+
+\begin_layout Standard
+One problem I had was that the external monitor was quite wavy initially.
+ To solve this, I found a bug report online (https://bugs.launchpad.net/ubuntu/luc
+id/+source/linux/+bug/537640) that said that disabling KMS solves the problem.
+ I'm not sure exactly what this means, but this is what I did (from https://wiki.
+ubuntu.com/KarmicKoala/ReleaseNotes#No Xv support for Intel 82852/855GM video
+ chips with KMS):
+\end_layout
+
+\begin_layout Standard
+In terminal typed:
+\end_layout
+
+\begin_layout LyX-Code
+sudo gedit /etc/default/grub
+\end_layout
+
+\begin_layout Standard
+Modified line 10 to read:
+\end_layout
+
+\begin_layout LyX-Code
+GRUB_CMDLINE_LINUX="nomodeset"
+\end_layout
+
+\begin_layout Standard
+In terminal typed:
+\end_layout
+
+\begin_layout LyX-Code
+sudo update-grub
+\end_layout
+
+\begin_layout Standard
+Rebooted computer.
+\end_layout
+
+\begin_layout Subsubsection
+Notes:
+\end_layout
+
+\begin_layout Itemize
+The projector's resolution is 1280x720.
+ If I am running powerpoint, it looks best to enter seamless mode, then
+ fullscreen mode in virtual box.
+\end_layout
+
+\begin_layout Section
+Rdiff backup
+\end_layout
+
+\begin_layout Subsection
+2012-0619: Rdiff backup - Andreatops
+\end_layout
+
+\begin_layout Standard
+command line:
+\end_layout
+
+\begin_layout LyX-Code
+rdiff-backup /home/andrea /media/HITACHI/Andreatops_backup
+\end_layout
+
+\begin_layout Standard
+Backup log:
+\end_layout
+
+\begin_layout Itemize
+Initial Backup: June 19, 2012
+\end_layout
+
+\begin_layout Subsection
+Rdiff backup - Andreaopteryx laptop
+\end_layout
+
+\begin_layout Standard
+Settings:
+\end_layout
+
+\begin_layout Itemize
+SAMSUNG>Andreaopteryx_bkup
+\end_layout
+
+\begin_layout Itemize
+command line: 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+rdiff-backup /home/andrea /media/SAMSUNG/Andreaopteryx_bkup
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Backup log:
+\end_layout
+
+\begin_layout Itemize
+Initial backup: July 22, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 2: Aug 2, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 3: Aug 12, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 4: Aug 17, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 5: Aug 25, 2010
+\end_layout
+
+\begin_layout Standard
+New hard drive Hitachi
+\end_layout
+
+\begin_layout Itemize
+Ext4>Andreaopteryx_backup
+\end_layout
+
+\begin_layout Itemize
+command line:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+rdiff-backup /home/andrea /media/Ext4/Andreaopteryx_backup
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Backup log:
+\end_layout
+
+\begin_layout Itemize
+New full backup: Sept 18, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 2: November 11, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 3: December 1, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 4: December 16, 2010
+\end_layout
+
+\begin_layout Itemize
+Backup 5: January 12, 2011
+\end_layout
+
+\begin_layout Itemize
+Backup 6: January 24, 2011
+\end_layout
+
+\begin_layout Itemize
+Backup 7: February 1, 2011
+\end_layout
+
+\begin_layout Itemize
+Backup 8: February 14, 2011
+\end_layout
+
+\begin_layout Itemize
+Backup 9: February 22, 2011
+\end_layout
+
+\begin_layout Itemize
+Backup 10: March 24, 2011 (have been syncing with desktop) incomplete
+\end_layout
+
+\begin_layout Section
+Bash modifications
+\end_layout
+
+\begin_layout Standard
+Modifications to the ~/.bashrc file:
+\end_layout
+
+\begin_layout Enumerate
+Adding folders to $PATH (the folders that bash looks in when you type an
+ executable):
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Add a line to the end that says 
+\end_layout
+
+\begin_layout LyX-Code
+export PATH=$PATH":/home/andrea/bin"
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Changing the command prompt to have a red background.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Add a line to to the end that says
+\end_layout
+
+\begin_layout LyX-Code
+PS1='${debian_chroot:+($debian_chroot)}
+\backslash
+[
+\backslash
+033[7;31m
+\backslash
+]
+\backslash
+u@
+\backslash
+h:
+\backslash
+w
+\backslash
+$
+\backslash
+[
+\backslash
+033[0m
+\backslash
+] '
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Lyx
+\end_layout
+
+\begin_layout Standard
+Lyx 1.6.5 kept crashing, so installed 1.6.7 from source (just followed the instructi
+ons in the INSTALL file).
+ Seems to be working ok.
+ I extracted the tarball into the ~/software folder, and the executable
+ seems to be in /usr/local/bin.
+ 
+\end_layout
+
+\begin_layout Standard
+For a new install, first do 
+\end_layout
+
+\begin_layout LyX-Code
+sudo apt-get build-dep lyx.
+\end_layout
+
+\begin_layout Section
+Wireless N card
+\end_layout
+
+\begin_layout Standard
+I had to download and modify the drivers for the Wireless N card that came
+ with the desktop (RaLink RT3090 Wireless 802.11n 1T/1R PCIe)
+\end_layout
+
+\begin_layout Standard
+See instructions here (http://www.ctbarker.info/2010/05/ubuntu-1004-wireless-chips
+ets-and-wpa.html) or in the pdf file I saved from that website in this folder.
+\end_layout
+
+\begin_layout Standard
+Lyx icon: Google 'lyx icon', saved one of the png's that it found, and added
+ it to the /usr/share/icons/hicolor/scalable/apps folder with the name 'lyx_icon.
+png'.
+ Added icon to the menu bar by going to System>preferences>Main menu.
+\end_layout
+
+\begin_layout Section
+ATI HD Radeon 4200
+\end_layout
+
+\begin_layout Standard
+Had some weird issues with the monitor display last night (while watching
+ a youtube video and hulu, it began to flash and the monitor would not display
+ anything, saying that it was using the incorrect frame rate), so I downloaded
+ the ATI driver for this card.
+ 
+\end_layout
+
+\begin_layout Itemize
+http://support.amd.com/us/gpudownload/linux/Pages/radeon_linux.aspx?type=2.4.1&produc
+t=2.4.1.3.42&lang=English
+\end_layout
+
+\begin_layout Itemize
+To install, right-clicked on file>Properties>Permissions, and set 'Allow
+ executing file as program'.
+ Then cd'd into containing directory and typed 
+\end_layout
+
+\begin_layout LyX-Code
+sh ./ati-driver-installer-11-2-x86.x86_64.run
+\end_layout
+
+\begin_layout Itemize
+This installed the driver.
+\end_layout
+
+\begin_layout Section
+Matplotlib
+\end_layout
+
+\begin_layout Standard
+Installed matplotlib from source (see matplotlib.sourceforge.net/users/installing.h
+tml for link to source file).
+ Uninstall current copy of matplotlib.
+ Then type
+\end_layout
+
+\begin_layout LyX-Code
+sudo apt-get build-dep matplotlib
+\end_layout
+
+\begin_layout LyX-Code
+cd matplotlib
+\end_layout
+
+\begin_layout LyX-Code
+python setup.py build
+\end_layout
+
+\begin_layout LyX-Code
+python setup.py install
+\end_layout
+
+\begin_layout Section
+Unison
+\end_layout
+
+\begin_layout Standard
+Unison is a synchronization software that allows you to sync files between
+ two computers.
+ The documentation is pretty decent and is at http://www.cis.upenn.edu/~bcpierce/un
+ison/download/releases/stable/unison-manual.html.
+\end_layout
+
+\begin_layout Section
+Adding new screen resolutions for external monitors/tvs/projectors
+\end_layout
+
+\begin_layout Itemize
+Instructions from http://www.arunviswanathan.com/node/53
+\begin_inset Graphics
+	filename ext_screen_res.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Notes
+\end_layout
+
+\begin_layout Itemize
+Hulu looks crappy when I play it on my desktop with fullscreen.
+ I think the problem is that with low-res shows, the video display can't
+ upscale the video fast enough, which makes it all choppy.
+ To get it smooth, I lowered the screen resolution when watching, or pop
+ it out into its own window.
+\end_layout
+
+\begin_layout Section
+Configure port forwarding (for use in dynamic DNS for instance)
+\end_layout
+
+\begin_layout Standard
+This website (http://portforward.com/english/routers/port_forwarding/Linksys/WRT5
+4GL/SSH.htm) has pretty good instructions for configuring port forwarding.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Set up a static IP.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Run ipconfig from Terminal and take note of the Mask.
+\end_layout
+
+\begin_layout Enumerate
+Log into the router and take note of the DNS servers.
+\end_layout
+
+\begin_layout Enumerate
+Go to Preferences>Network Connections> Wired and select the connection running
+ through the proper ethernet card.
+\end_layout
+
+\begin_layout Enumerate
+Go to IPv4 Settings.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Switch method to manual.
+\end_layout
+
+\begin_layout Enumerate
+Select an IP address compatible with the router.
+\end_layout
+
+\begin_layout Enumerate
+Type in the Mask from ifconfig.
+\end_layout
+
+\begin_layout Enumerate
+Type in the gateway IP (the router's internal IP address, usually 192.168.1.1
+ for linksys routers).
+\end_layout
+
+\begin_layout Enumerate
+Type in the DNS servers from the router settings.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Configure the router for port forwarding.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Log in to the router and go to 'Security'.
+ Remove checkmark from 'Block anonymous internet requests' and Save settings.
+\end_layout
+
+\begin_layout Enumerate
+Go to 
+\begin_inset Quotes eld
+\end_inset
+
+Applications and Gaming
+\begin_inset Quotes erd
+\end_inset
+
+ > Port Range Forward.
+\end_layout
+
+\begin_layout Enumerate
+Put in 'Name1' under Application, '22' under both Start and End, 'Both'
+ under Protocol, and the static IP address chosen above for 'IP address'.
+ Check Enable and Save Settings.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Notes:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+I did not port forward port 5900 for VNC and instead use ssh tunneling (see
+ below).
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Configuring Dynamic DNS
+\end_layout
+
+\begin_layout Standard
+This service allows you to ssh into the computer remotely even if the IP
+ address is not static (e.g., with DSL).
+ The website (http://www.dyndns.com/support/kb/dyndns.html#howto) has pretty
+ good step-by-step instructions.
+ In a nutshell:
+\end_layout
+
+\begin_layout Enumerate
+Configure port forwarding as shown above.
+\end_layout
+
+\begin_layout Enumerate
+Test network using 'Open Port Tool' linked from the site above.
+\end_layout
+
+\begin_layout Enumerate
+Create the host.
+\end_layout
+
+\begin_layout Enumerate
+Configure the router to update the external IP address (easy to find settings
+ there).
+\end_layout
+
+\begin_layout Subsection
+Notes
+\end_layout
+
+\begin_layout Itemize
+Desktop static IP: 192.168.1.10
+\end_layout
+
+\begin_layout Itemize
+DynDNS.com hostname: andreatops.dyndns.org
+\end_layout
+
+\begin_layout Itemize
+Current external IP (3/12/2011): 75.20.204.60
+\end_layout
+
+\begin_layout Section
+Ssh server: starting and logging in
+\end_layout
+
+\begin_layout Subsection
+With switch, from away:
+\end_layout
+
+\begin_layout LyX-Code
+ssh andrea@andreatops.dyndns.org 
+\end_layout
+
+\begin_layout Standard
+and type in password
+\end_layout
+
+\begin_layout Itemize
+When using a graphical program on the desktop (even if I'm just running
+ a script that uses ImageJ or matplotlib for instance), I have to set x11
+ forwarding to forward the display settings so the script will work.
+ In that case, use
+\end_layout
+
+\begin_layout LyX-Code
+ssh -X andrea@andreatops.dyndns.org
+\end_layout
+
+\begin_layout Subsection
+With switch, from home:
+\end_layout
+
+\begin_layout Itemize
+First install open-ssh server on the computer you want to ssh into.
+\end_layout
+
+\begin_layout Itemize
+The desktop has been set with a static IP of 192.168.1.10.
+ To ssh in from the laptop, type
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+ssh andrea@192.168.1.10
+\end_layout
+
+\begin_layout Standard
+and type in the password (same as the computer password).
+ Done!
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Before switch purchased:
+\end_layout
+
+\begin_layout Standard
+Sometimes I have trouble starting the ssh server on the desktop.
+ To do so, I typed in the following commands:
+\end_layout
+
+\begin_layout LyX-Code
+sudo rm /etc/ssh/ssh_host_* 
+\end_layout
+
+\begin_layout LyX-Code
+sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key 
+\end_layout
+
+\begin_layout LyX-Code
+sudo ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key 
+\end_layout
+
+\begin_layout LyX-Code
+sudo /etc/init.d/ssh reload
+\end_layout
+
+\begin_layout Standard
+To log in from the laptop, can type in:
+\end_layout
+
+\begin_layout LyX-Code
+ssh andrea@ANDREATOPS.local
+\end_layout
+
+\begin_layout Standard
+Now I want to do set it up so that it connects through a wired ethernet
+ connection rather than through the router.
+\end_layout
+
+\begin_layout Standard
+First on the desktop I went to the System>Preferences>Network Connections,
+ Wired tab, and Edited the 'Auto eth0' connection by selecting the IPv4
+ Settings tab.
+ Then I selected 'Manual' selected the 
+\begin_inset Quotes eld
+\end_inset
+
+Add' button, and wrote in address = 192.168.10.10, netmask = 255.255.255.0, gateway
+ = 192.168.10.1.
+\end_layout
+
+\begin_layout Standard
+Did the same thing for the laptop and put in address = 192.168.10.11, netmask
+ = 255.255.255.0, gateway = 192.168.10.1.
+\end_layout
+
+\begin_layout Standard
+Works but is pretty slow and won't let me access the internet at the same
+ time.
+\end_layout
+
+\begin_layout Section
+VNC server / remote desktop
+\end_layout
+
+\begin_layout Standard
+https://help.ubuntu.com/community/VNC has good instructions on how to do this
+\end_layout
+
+\begin_layout Enumerate
+First, I installed a VNC server on the desktop.
+  I installed x11vnc (in repo).
+\end_layout
+
+\begin_layout Enumerate
+Next, I configured the router to forward connections on port 22 to the desktop.
+\end_layout
+
+\begin_layout Enumerate
+Then I basically copied and pasted the script from the above website and
+ saved it to a file on the desktop called 'connect to andreatops'; afterwards,
+ I right-clicked on it and went to Properties>Permissions>Allow executing
+ file as program.
+ Here is the script
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+#!/bin/sh
+\end_layout
+
+\begin_layout LyX-Code
+ssh -f -L 5900:localhost:5900 andrea@andreatops.dyndns.org 
+\backslash
+ x11vnc -safer -localhost -nopw -once -display :0 
+\backslash
+ && sleep 5 
+\backslash
+ && vinagre localhost:0
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Then I can just click on the script to open the remote desktop.
+\end_layout
+
+\begin_layout Section
+ApE - a plasmid editor
+\end_layout
+
+\begin_layout Itemize
+software website: http://biologylabs.utah.edu/jorgensen/wayned/ape/
+\end_layout
+
+\begin_layout Itemize
+website detailing how to run ApE in ubuntu (also pasted below): http://pastebin.c
+om/fJNjcW1G
+\end_layout
+
+\begin_layout LyX-Code
+# download latest windows version/package 
+\end_layout
+
+\begin_layout LyX-Code
+# 
+\end_layout
+
+\begin_layout LyX-Code
+wget http://biologylabs.utah.edu/jorgensen/wayned/ape/Download/Windows/ApE_win_cur
+rent.zip unzip ApE_win_current.zip
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+# download & setup tclkit (http://equi4.com/tclkit/index.html)
+\end_layout
+
+\begin_layout LyX-Code
+# 
+\end_layout
+
+\begin_layout LyX-Code
+wget http://www.equi4.com/pub/tk/8.5.1/tclkit-linux-x86.gz gunzip tclkit-linux-x86.gz
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+# you might have to gunzip it again, e.g.: 
+\end_layout
+
+\begin_layout LyX-Code
+# mv tclkit-linux-x86 tclkit-linux-x86.gz; gunzip tclkit-linux-x86.gz
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+# tclkit src is supposed to be avail, but the link is broken
+\end_layout
+
+\begin_layout LyX-Code
+chmod +x tclkit-linux-x86
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+# download SDX (Starkit Developer eXtension) 
+\end_layout
+
+\begin_layout LyX-Code
+# http://equi4.com/starkit/sdx.html 
+\end_layout
+
+\begin_layout LyX-Code
+wget http://equi4.com/pub/sk/sdx.kit
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+# unwrap & run ApE 
+\end_layout
+
+\begin_layout LyX-Code
+# 
+\end_layout
+
+\begin_layout LyX-Code
+./tclkit-linux-x86 sdx.kit unwrap ApE.exe 
+\end_layout
+
+\begin_layout LyX-Code
+./tclkit-linux-x86 ApE.vfs/main.tcl
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+# I get an invalid 'tk' command error (pkgIndex.tcl) -- not sure what this
+ affects 
+\end_layout
+
+\begin_layout Itemize
+another website about installing in linux (if the linux code gets posted
+ again): http://www.allandebono.org/technical-stuff/installing-ape-for-ubuntu/
+\end_layout
+
+\begin_layout Section
+Connecting to UCSD wired network
+\end_layout
+
+\begin_layout Itemize
+***set IPv6 settings/ Method to 'Ignore' ***
+\end_layout
+
+\begin_layout Itemize
+Do not use 802.1x security
+\end_layout
+
+\begin_layout Itemize
+IPv4 settings: can either be set to manual or Automatic (DHCP)
+\end_layout
+
+\begin_layout Itemize
+Uncheck 
+\begin_inset Quotes eld
+\end_inset
+
+require IPv4 addressing for this connection to complete
+\begin_inset Quotes erd
+\end_inset
+
+ (may or may not matter)
+\end_layout
+
+\begin_layout Itemize
+Manual:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+IPv4 132.239.129.177
+\end_layout
+
+\begin_layout Itemize
+IPv4 subnet mask 255.255.255.224
+\end_layout
+
+\begin_layout Itemize
+gateway 132.239.129.161 (or maybe .191)
+\end_layout
+
+\begin_layout Itemize
+DNS server 132.239.0.252
+\end_layout
+
+\begin_layout Itemize
+DHCP server 132.239.1.19
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Connecting two computers with an ethernet cable (one windows, one Ubuntu)
+\end_layout
+
+\begin_layout Itemize
+In Ubuntu, download samba.
+ Share a folder (here 
+\begin_inset Quotes eld
+\end_inset
+
+Public).
+\end_layout
+
+\begin_layout Itemize
+Connect computers with an ethernet cable.
+ Go to the wired network settings and create a new network.
+ Manually assign an IP address (here 192.168.1.1).
+\end_layout
+
+\begin_layout Itemize
+In Windows, go to the network settings after the ethernet cable is connected
+ and manually assign an IP address.
+ Turn on file sharing discovery and all those settings; I chose to change
+ the network to a Private network to get it to work.
+\end_layout
+
+\begin_layout Itemize
+In both OS's, disconnect and reconnect the wired network.
+\end_layout
+
+\begin_layout Itemize
+Now in the 
+\begin_inset Quotes eld
+\end_inset
+
+Network
+\begin_inset Quotes erd
+\end_inset
+
+ part of the file system the shared folders for each computer should show
+ up.
+\end_layout
+
+\begin_layout Section
+Other programs I've installed
+\end_layout
+
+\begin_layout Subsection
+Bazaar, bazaar explorer (gui), bzr nautilus
+\end_layout
+
+\begin_layout Subsection
+ipython, geany
+\end_layout
+
+\begin_layout Subsection
+gimp, geeqie, mplayer, smplayer, vlc
+\end_layout
+
+\begin_layout Subsection
+lyx 
+\end_layout
+
+\begin_layout Subsection
+google desktop
+\end_layout
+
+\begin_layout Subsection
+wine - kinda useless
+\end_layout
+
+\end_body
+\end_document
