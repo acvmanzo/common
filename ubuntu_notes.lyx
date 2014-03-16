@@ -1653,6 +1653,10 @@ Works but is pretty slow and won't let me access the internet at the same
 VNC server / remote desktop
 \end_layout
 
+\begin_layout Subsection
+Using dynamic DNS
+\end_layout
+
 \begin_layout Standard
 https://help.ubuntu.com/community/VNC has good instructions on how to do this
 \end_layout
@@ -1692,6 +1696,67 @@ ssh -f -L 5900:localhost:5900 andrea@andreatops.dyndns.org
 \end_deeper
 \begin_layout Enumerate
 Then I can just click on the script to open the remote desktop.
+\end_layout
+
+\begin_layout Subsection
+Connecting to a VNC server on a Linux computer
+\end_layout
+
+\begin_layout Subsubsection
+Server computer
+\end_layout
+
+\begin_layout Enumerate
+Install VNC Server by RealVNC onto the server computer.
+\end_layout
+
+\begin_layout Enumerate
+SSH into the server and type the following; select a password if necessary.
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+vncserver :1
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Client computer
+\end_layout
+
+\begin_layout Enumerate
+Install RealVNC Viewer.
+\end_layout
+
+\begin_layout Enumerate
+Tunnel VNC connections through SSH: in the command line, type (substituting
+ the user and server name for the last two entries)
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+ssh -L 5901:localhost:5901 -N -f -l andrea flycomp.ucsd.edu
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Start VNC Viewer.
+ Under VNC Server, type "localhost" and under Encryption select "Let VNC
+ Server choose".
+ Click "Connect".
+\end_layout
+
+\begin_layout Enumerate
+Enter the VNC password you chose earlier.
+ You should now be logged onto your computer.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Close the window to close the VNC connection.
+ In the server terminal window, type "vncserver -kill :1" to end the vncserver
+ session.
+ 
 \end_layout
 
 \begin_layout Section
