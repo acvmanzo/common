@@ -1740,56 +1740,6 @@ ssh -L 5901:localhost:5901 -N -f -l andrea flycomp.ucsd.edu
 
 \end_deeper
 \begin_layout Enumerate
-What options mean:
-\end_layout
-
-\begin_deeper
-\begin_layout Description
--L [bind_address:]port:host:hostport Specifies that the given port on the
- local (client) host is to be for‐ warded to the given host and port on
- the remote side.
- This works by allocating a socket to listen to port on the local side,
- optionally bound to the specified bind_address.
- Whenever a connection is made to this port, the connection is forwarded
- over the secure channel, and a connection is made to host port hostport
- from the remote machine.
- Port forwardings can also be specified in the configuration file.
- IPv6 addresses can be specified by enclosing the address in square brackets.
- Only the superuser can forward privileged ports.
- By default, the local port is bound in accordance with the GatewayPorts
- setting.
- However, an explicit bind_address may be used to bind the connection to
- a specific address.
- The bind_address of “localhost” indicates that the listening port be bound
- for local use only, while an empty address or ‘*’ indi‐ cates that the
- port should be available from all interfaces.
-\end_layout
-
-\begin_layout Description
--l login_name Specifies the user to log in as on the remote machine.
- This also may be specified on a per-host basis in the configuration file.
-\end_layout
-
-\begin_layout Description
--f Requests ssh to go to background just before command execution.
- This is useful if ssh is going to ask for passwords or passphrases, but
- the user wants it in the background.
- This implies -n.
- The recommended way to start X11 programs at a remote site is with something
- like ssh -f host xterm.
- If the ExitOnForwardFailure configuration option is set to “yes”, then
- a client started with -f will wait for all remote port forwards to be suc‐
- cessfully established before placing itself in the background.
- 
-\end_layout
-
-\begin_layout Description
--N Do not execute a remote command.
- This is useful for just forwarding ports (protocol version 2 only).
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
 Start VNC Viewer.
  Under VNC Server, type "localhost" and under Encryption select "Let VNC
  Server choose".
