@@ -1,0 +1,51 @@
+%     Created: Mon Apr 28 05:00 PM 2014 P
+% Last Change: Mon Apr 28 05:00 PM 2014 P
+%
+
+\documentclass[12pt]{article}
+\renewcommand{\familydefault}{\sfdefault} 
+\usepackage{fullpage}
+%
+\begin{document}
+\title{Useful Vim Tricks}
+\author{Andrea Manzo}
+\date{\today}
+\maketitle
+
+\begin{itemize}
+    \item capital letter marks - can be used when editing multiple files
+    \item tabs 
+        \begin{itemize}
+            \item :tabn to open a new tab
+            \item gt to move between tabs 
+            \item :tabedit to open a file in a new tab
+            \item :tabsplit to open a tab with the same buffer
+        \end{itemize}
+    \item registers - specify register to yank stuff into; e.g. \textbf{``fyy} yanks a line into register f
+    \item saveas - \textbf{:saveas }to save the file under a new name and edit the new file
+    \item :split - splits the window; view the same file in two windows
+        \begin{itemize}
+            \item \textbf{CTRL-w w} switches between windows
+            \item :only closes all windows except current one
+            \item :vsplit opens windows side-by-side
+            \item move window up: CTRL-W K
+            \item move to the top window: CTRL-W k
+            \item :qall closes all windows and exits vim
+            \item :wall to write all windows
+        \end{itemize}
+    \item vimdiff to view differences between files
+        \begin{itemize}
+            \item \textbf{:diffsplit file} to view differences from within vim
+        \end{itemize}
+    \item recording mode:
+        \begin{itemize}
+            \item \textbf{q{register}} records keystrokes into register {register} < (a-z)
+            \item \textbf{q} ends recording
+            \item \textbf{@{register}} to execute macro
+        \end{itemize}
+        
+
+\end{itemize}
+
+\end{document}
+
