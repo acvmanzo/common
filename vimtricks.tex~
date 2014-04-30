@@ -45,11 +45,7 @@
             \item \textbf{q} ends recording
             \item \textbf{@{register}} to execute macro
         \end{itemize}
-    \item substitute - \textbf{:s} to find/replace
-        \begin{itemize}
-            \item can write a command range (\% = apply to all lines)
-            \item can use a pattern for a range, add and subtract lines, and use marks
-            \item ``The command  ``I\{string\}Esc'' inserts the text {string} in each line'' 
+        
 
 \end{itemize}
 
