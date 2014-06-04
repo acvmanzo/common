@@ -14,6 +14,39 @@
 \date{\today}
 \maketitle
 
+\section{Useful Plugins}
+\begin{itemize}
+    \item Latexbox - useful latex features
+    \item snipmate - snippets for different filetypes
+    \item tagbar - brings up a window that acts like a table of contents for
+        various files 
+    \item nerdcommenter - keybindings for commenting multiple filetypes
+    \item vim-latex-live-preview - live preview of latex code
+    \item CSApprox - allows vim to use fancy colorschemes
+    \item pathogen - plugin manager
+\end{itemize}
+
+\section{My Vim configuration}
+\begin{itemize}
+    \item Have pathogen installed to manage plugins
+    \item Filetype specific configurations are in \textasciitilde/.vim/ftplugin
+    \item snippets for snipmate are in \textasciitilde/.vim/snippets
+\end{itemize}
+
+\section{Vim tricks for configuring}
+\begin{itemize}
+    \item :set filetype - shows what filetype options are set
+    \item :set foldmethod - shows foldmethod
+    \item :set rtp? - shows the directories in the run time path
+    \item in .vimrc, call pathogen near the top of the file. Have the first
+        lines be:
+\begin{verbatim}
+        set nocompatible
+        call pathogen#infect()
+\end{verbatim}
+\end{itemize}
+
+\section{Tricks from the Documentation}
 \begin{itemize}
     \item capital letter marks - can be used when editing multiple files
     \item tabs 
@@ -50,7 +83,23 @@
             \item can write a command range (\% = apply to all lines)
             \item can use a pattern for a range, add and subtract lines, and use marks
             \item ``The command  ``I\{string\}Esc'' inserts the text {string} in each line'' 
-
+        \end{itemize}
+    \item ranges - after : but before command, can specify a range for the command to apply
+        \begin{itemize}
+            \item . = current line, \# = line \#s, \$ = last line
+        \end{itemize}
+    \item global - to execute more complicated commands
+    \item visual block
+        \begin{itemize}
+            \item insert text at the end of a line: Visual block -> use \$ to extend to the end of the line, and then type ``A'' to append text
+            \item ~ swap case, u to make lowercase, U uppercase
+            \item \textgreater  to indent
+        \end{itemize}
+    \item \textbf{:read} to copy a file into vim, \textbf{:read | date} to read the output of a command into the file
+    \item gq to format text
+    \item use an external program: ex., !sort
+    \item recover from a crash with the swap file
+    \item "Clever Tricks" section: Count words, find/view a man page
 \end{itemize}
 
 \end{document}
